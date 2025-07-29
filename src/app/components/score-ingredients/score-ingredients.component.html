@@ -1,32 +1,28 @@
 <div class="score-ingredients">
-  <div class="ingredients-grid">
+  <div class="ingredients-list">
     <div 
       class="ingredient-tile"
       *ngFor="let ingredient of ingredients"
       (click)="onIngredientClick(ingredient)"
       [class]="getImpactClass(ingredient.impact)">
       
-      <div class="tile-header">
-        <div class="ingredient-icon">{{ ingredient.icon }}</div>
-        <div class="impact-indicator">{{ getImpactIcon(ingredient.impact) }}</div>
-      </div>
-      
-      <div class="ingredient-name">{{ ingredient.name }}</div>
-      
-      <div class="score-display">
-        <div class="score-circle" [style.border-color]="getScoreColor(ingredient.score)">
-          <span class="score-value" [style.color]="getScoreColor(ingredient.score)">
-            {{ ingredient.score }}
-          </span>
+      <div class="tile-content">
+        <div class="left-section">
+          <div class="ingredient-icon">{{ ingredient.icon }}</div>
+          <div class="ingredient-info">
+            <div class="ingredient-name">{{ ingredient.name }}</div>
+            <div class="ingredient-description">{{ ingredient.description }}</div>
+          </div>
         </div>
-      </div>
-      
-      <div class="ingredient-description">
-        {{ ingredient.description }}
-      </div>
-      
-      <div class="learn-more">
-        <span>Learn more →</span>
+        
+        <div class="right-section">
+          <div class="impact-indicator" *ngIf="getImpactIcon(ingredient.impact)" [class]="getImpactClass(ingredient.impact)">
+            <span class="arrow-icon">{{ getImpactIcon(ingredient.impact) }}</span>
+          </div>
+          <div class="learn-more">
+            <span>Learn more →</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

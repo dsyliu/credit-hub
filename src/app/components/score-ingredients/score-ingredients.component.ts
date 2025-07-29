@@ -20,13 +20,7 @@ export class ScoreIngredientsComponent {
     this.router.navigate(['/ingredient', ingredient.id]);
   }
 
-  getScoreColor(score: number): string {
-    if (score >= 90) return '#27ae60';
-    if (score >= 80) return '#2ecc71';
-    if (score >= 70) return '#f39c12';
-    if (score >= 60) return '#e67e22';
-    return '#e74c3c';
-  }
+
 
   getImpactClass(impact: ScoreIngredient['impact']): string {
     switch (impact) {
@@ -39,10 +33,10 @@ export class ScoreIngredientsComponent {
 
   getImpactIcon(impact: ScoreIngredient['impact']): string {
     switch (impact) {
-      case 'positive': return '↗️';
-      case 'negative': return '↘️';
-      case 'neutral': return '➡️';
-      default: return '➡️';
+      case 'positive': return '↑';
+      case 'negative': return '↓';
+      case 'neutral': return '';
+      default: return '';
     }
   }
 }
