@@ -1,0 +1,70 @@
+<div class="page-container">
+  <div class="page-header">
+    <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
+    <div class="header-content">
+      <h1>Alerts</h1>
+      <div class="alert-summary">
+        <span class="unread-count" *ngIf="getUnreadCount() > 0">
+          {{ getUnreadCount() }} unread
+        </span>
+        <span class="action-required" *ngIf="getActionRequiredCount() > 0">
+          {{ getActionRequiredCount() }} need attention
+        </span>
+      </div>
+    </div>
+    <button 
+      class="mark-all-read-btn" 
+      (click)="markAllAsRead()"
+      *ngIf="getUnreadCount() > 0">
+      Mark All Read
+    </button>
+  </div>
+  
+  <div class="alerts-content">
+    <div class="alerts-list" *ngIf="alerts.length > 0">
+      <div 
+        *ngFor="let alert of alerts" 
+        class="alert-item"
+        [class.unread]="!alert.isRead"
+        [class.action-required]="alert.actionRequired"
+        [attr.data-type]="alert.type">
+        
+        <div class="alert-icon">
+          {{ getAlertIcon(alert.type) }}
+        </div>
+        
+        <div class="alert-content">
+          <div class="alert-header">
+            <h3 class="alert-title">{{ alert.title }}</h3>
+            <div class="alert-meta">
+              <span class="alert-date">{{ alert.date | date:'MMM d, y' }}</span>
+              <span class="action-badge" *ngIf="alert.actionRequired && !alert.isRead">
+                Action Required
+              </span>
+            </div>
+          </div>
+          <p class="alert-message">{{ alert.message }}</p>
+        </div>
+        
+        <div class="alert-actions">
+          <button 
+            class="mark-read-btn" 
+            (click)="markAsRead(alert.id)"
+            *ngIf="!alert.isRead"
+            [attr.aria-label]="'Mark ' + alert.title + ' as read'">
+            Mark Read
+          </button>
+          <div class="read-indicator" *ngIf="alert.isRead">
+            ✓ Read
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="no-alerts" *ngIf="alerts.length === 0">
+      <div class="no-alerts-icon">🔔</div>
+      <h2>No Alerts</h2>
+      <p>You're all caught up! No alerts require your attention at this time.</p>
+    </div>
+  </div>
+</div>

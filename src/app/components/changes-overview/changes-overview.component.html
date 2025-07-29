@@ -1,0 +1,29 @@
+<div class="changes-overview">
+  <div class="changes-list" *ngIf="changes.length > 0; else noChanges">
+    <div 
+      class="change-item" 
+      *ngFor="let change of changes"
+      [class]="getChangeClass(change.type)">
+      
+      <div class="change-icon">
+        {{ getChangeIcon(change.type) }}
+      </div>
+      
+      <div class="change-content">
+        <div class="change-description">
+          {{ change.description }}
+        </div>
+        <div class="change-detail" [class]="getChangeClass(change.type)">
+          {{ change.changeDetail || 'No additional details' }}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #noChanges>
+    <div class="no-changes">
+      <div class="no-changes-icon">📊</div>
+      <p>No significant changes since last month</p>
+    </div>
+  </ng-template>
+</div>

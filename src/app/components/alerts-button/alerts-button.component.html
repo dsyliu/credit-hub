@@ -1,0 +1,7 @@
+<button 
+  class="alerts-button" 
+  (click)="navigateToAlerts()"
+  [attr.aria-label]="'Alerts (' + alertCount + ' unread)'">
+  <span class="bell-icon">🔔</span>
+  <span class="alert-badge" *ngIf="alertCount > 0">{{ alertCount }}</span>
+</button>

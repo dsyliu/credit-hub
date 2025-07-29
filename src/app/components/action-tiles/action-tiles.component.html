@@ -1,0 +1,13 @@
+<div class="action-tiles">
+  <div class="tiles-grid">
+    <div 
+      *ngFor="let tile of tiles" 
+      class="action-tile"
+      (click)="navigateToTile(tile.route)"
+      [attr.data-testid]="tile.id">
+      <div class="tile-icon">{{ tile.icon }}</div>
+      <h3 class="tile-title">{{ tile.title }}</h3>
+      <p class="tile-description">{{ tile.description }}</p>
+    </div>
+  </div>
+</div>

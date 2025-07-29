@@ -1,0 +1,83 @@
+.alerts-button {
+  position: relative;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  
+  &:hover {
+    background-color: var(--bg-secondary);
+    border-color: #3498db;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  .bell-icon {
+    font-size: 1.2rem;
+    color: var(--text-primary);
+  }
+  
+  .alert-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    border: 2px solid var(--card-bg);
+  }
+}
+
+@media (max-width: 768px) {
+  .alerts-button {
+    min-width: 40px;
+    height: 40px;
+    padding: 6px 10px;
+    
+    .bell-icon {
+      font-size: 1.1rem;
+    }
+    
+    .alert-badge {
+      width: 16px;
+      height: 16px;
+      font-size: 0.65rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .alerts-button {
+    min-width: 36px;
+    height: 36px;
+    padding: 4px 8px;
+    
+    .bell-icon {
+      font-size: 1rem;
+    }
+    
+    .alert-badge {
+      width: 14px;
+      height: 14px;
+      font-size: 0.6rem;
+    }
+  }
+}

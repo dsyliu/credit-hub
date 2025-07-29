@@ -1,0 +1,13 @@
+<div class="score-display">
+  <div class="gauge-container">
+    <div echarts [options]="gaugeOption" class="score-gauge"></div>
+  </div>
+  
+  <div class="score-details">
+    <div class="score-change" [class]="scoreChangeClass">
+      <span class="change-text">{{ scoreChangeText }}</span>
+      <span class="change-period">from last month</span>
+    </div>
+
+  </div>
+</div>

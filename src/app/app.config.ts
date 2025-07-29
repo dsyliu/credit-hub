@@ -4,6 +4,8 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideEchartsCore } from 'ngx-echarts';
+import * as echarts from 'echarts';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -11,5 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes),
+    provideEchartsCore({
+      echarts: () => import('echarts')
+    }),
   ],
 };
