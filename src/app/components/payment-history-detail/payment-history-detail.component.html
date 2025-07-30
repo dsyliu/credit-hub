@@ -1,0 +1,169 @@
+<div class="page-container">
+  <div class="page-header">
+    <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
+    <h1>Payment History</h1>
+    <div class="score-impact-badge positive">
+      <span class="impact-icon">⬆️</span>
+      <span class="impact-text">Excellent Impact</span>
+    </div>
+  </div>
+
+  <div class="ingredient-content" *ngIf="ingredientMapping">
+    <div class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-stats">
+        <div class="stat-card primary">
+          <div class="stat-value">35%</div>
+          <div class="stat-label">of your FICO Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">100%</div>
+          <div class="stat-label">Accounts paid as agreed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Late payments</div>
+        </div>
+      </div>
+      <p class="ingredient-description">
+        Payment history is the most important factor in your credit score
+        calculation. Your perfect payment record demonstrates exceptional
+        financial responsibility and significantly boosts your creditworthiness.
+      </p>
+    </div>
+
+    <div class="attributes-section">
+      <h2>Payment History Details</h2>
+      <div class="attributes-grid">
+        <div
+          class="attribute-card"
+          *ngFor="let attribute of ingredientMapping.attributes"
+          [class.excellent]="
+            attribute.value === '0' ||
+            attribute.value === 0 ||
+            attribute.value === '100%'
+          "
+        >
+          <div class="attribute-header">
+            <h3 class="attribute-label">{{ attribute.label }}</h3>
+            <div class="attribute-value">{{ attribute.value }}</div>
+          </div>
+          <p class="attribute-description">{{ attribute.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="impact-analysis-section">
+      <h2>Impact Analysis</h2>
+      <div class="impact-cards">
+        <div class="impact-card positive">
+          <div class="impact-header">
+            <div class="impact-icon">✅</div>
+            <h4>Excellent Payment Record</h4>
+          </div>
+          <p>
+            Your perfect payment history with zero late payments is adding
+            significant value to your credit score. This demonstrates
+            exceptional financial discipline.
+          </p>
+        </div>
+        <div class="impact-card positive">
+          <div class="impact-header">
+            <div class="impact-icon">🏆</div>
+            <h4>100% Accounts Paid as Agreed</h4>
+          </div>
+          <p>
+            Having all accounts consistently paid as agreed shows lenders you're
+            a reliable borrower, which maximizes this component of your score.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2>Maintaining Excellence</h2>
+      <div class="recommendations-grid">
+        <div class="recommendation-card priority-high">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">🔔</div>
+            <h4>Set Up Autopay</h4>
+            <span class="priority-badge">Essential</span>
+          </div>
+          <p>
+            Protect your perfect record by setting up automatic payments for at
+            least the minimum amount on all accounts.
+          </p>
+          <div class="recommendation-actions">
+            <button class="action-btn">Set Up Autopay</button>
+          </div>
+        </div>
+
+        <div class="recommendation-card priority-medium">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">📱</div>
+            <h4>Payment Alerts</h4>
+            <span class="priority-badge medium">Recommended</span>
+          </div>
+          <p>
+            Set up mobile alerts and calendar reminders 3-5 days before each
+            payment due date as a backup.
+          </p>
+          <div class="recommendation-actions">
+            <button class="action-btn secondary">Set Alerts</button>
+          </div>
+        </div>
+
+        <div class="recommendation-card priority-low">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">📊</div>
+            <h4>Monitor Regularly</h4>
+            <span class="priority-badge low">Good Practice</span>
+          </div>
+          <p>
+            Check your credit reports monthly to ensure all payments are being
+            reported correctly by your creditors.
+          </p>
+          <div class="recommendation-actions">
+            <button class="action-btn secondary">View Credit Report</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-section">
+      <h2>Pro Tips</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-icon">💡</div>
+          <div class="tip-content">
+            <h5>Payment Buffer</h5>
+            <p>
+              Pay bills 2-3 days early to account for processing delays and
+              weekends.
+            </p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">🎯</div>
+          <div class="tip-content">
+            <h5>Multiple Payment Methods</h5>
+            <p>
+              Have backup payment methods ready in case your primary method
+              fails.
+            </p>
+          </div>
+        </div>
+        <div class="tip-card">
+          <div class="tip-icon">📈</div>
+          <div class="tip-content">
+            <h5>Keep Records</h5>
+            <p>
+              Save payment confirmations and statements to dispute any reporting
+              errors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

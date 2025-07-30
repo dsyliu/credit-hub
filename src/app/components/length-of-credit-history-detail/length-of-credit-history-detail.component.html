@@ -1,0 +1,102 @@
+<div class="page-container">
+  <div class="page-header">
+    <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
+    <h1>Length of Credit History</h1>
+    <div class="score-impact-badge positive">
+      <span class="impact-icon">⬆️</span>
+      <span class="impact-text">Strong Impact</span>
+    </div>
+  </div>
+  
+  <div class="ingredient-content" *ngIf="ingredientMapping">
+    <div class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-stats">
+        <div class="stat-card primary">
+          <div class="stat-value">15%</div>
+          <div class="stat-label">of your FICO Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Years oldest account</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">6.5</div>
+          <div class="stat-label">Years average age</div>
+        </div>
+      </div>
+      <p class="ingredient-description">
+        Your credit history length is excellent with a 12-year oldest account and 6.5-year average age. 
+        This demonstrates long-term credit experience and significantly boosts your creditworthiness.
+      </p>
+    </div>
+
+    <div class="attributes-section">
+      <h2>Credit History Timeline</h2>
+      <div class="attributes-grid">
+        <div 
+          class="attribute-card excellent" 
+          *ngFor="let attribute of ingredientMapping.attributes">
+          <div class="attribute-header">
+            <h3 class="attribute-label">{{ attribute.label }}</h3>
+            <div class="attribute-value positive">{{ attribute.value }}</div>
+          </div>
+          <p class="attribute-description">{{ attribute.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-section">
+      <h2>Credit Age Visualization</h2>
+      <div class="timeline-chart">
+        <div class="timeline-bar">
+          <div class="timeline-segment excellent" style="width: 70%">
+            <span class="segment-label">Excellent (7+ years)</span>
+          </div>
+          <div class="timeline-segment good" style="width: 20%">
+            <span class="segment-label">Good (3-7 years)</span>
+          </div>
+          <div class="timeline-segment fair" style="width: 10%">
+            <span class="segment-label">Fair (0-3 years)</span>
+          </div>
+        </div>
+        <div class="timeline-marker" style="left: 54%">
+          <div class="marker-line"></div>
+          <div class="marker-label">Your Average: 6.5 years</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2>Maintaining Your Advantage</h2>
+      <div class="recommendations-grid">
+        <div class="recommendation-card priority-high">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">🔒</div>
+            <h4>Keep Old Accounts Open</h4>
+            <span class="priority-badge">Critical</span>
+          </div>
+          <p>Never close your oldest credit cards, even if you don't use them. They're anchoring your excellent credit age.</p>
+        </div>
+        
+        <div class="recommendation-card priority-medium">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">💳</div>
+            <h4>Occasional Usage</h4>
+            <span class="priority-badge medium">Recommended</span>
+          </div>
+          <p>Use your oldest cards occasionally to prevent issuer closure due to inactivity.</p>
+        </div>
+        
+        <div class="recommendation-card priority-low">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">⏰</div>
+            <h4>Be Patient with New Accounts</h4>
+            <span class="priority-badge low">Long-term</span>
+          </div>
+          <p>Limit new account openings to preserve your excellent average account age.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

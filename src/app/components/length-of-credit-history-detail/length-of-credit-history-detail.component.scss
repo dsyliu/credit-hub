@@ -1,0 +1,81 @@
+@import '../payment-history-detail/payment-history-detail.component.scss';
+
+.timeline-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+    color: var(--text-primary);
+  }
+  
+  .timeline-chart {
+    position: relative;
+    margin: 20px 0;
+  }
+  
+  .timeline-bar {
+    display: flex;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    
+    .timeline-segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      
+      &.excellent {
+        background: #27ae60;
+      }
+      
+      &.good {
+        background: #f39c12;
+      }
+      
+      &.fair {
+        background: #e74c3c;
+      }
+      
+      .segment-label {
+        white-space: nowrap;
+      }
+    }
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: -30px;
+    transform: translateX(-50%);
+    
+    .marker-line {
+      width: 2px;
+      height: 70px;
+      background: #3498db;
+      margin: 0 auto;
+    }
+    
+    .marker-label {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3498db;
+      white-space: nowrap;
+    }
+  }
+}
+
+.attribute-value.positive {
+  color: #27ae60;
+}

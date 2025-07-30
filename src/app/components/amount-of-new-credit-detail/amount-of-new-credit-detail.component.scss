@@ -1,0 +1,95 @@
+@import '../payment-history-detail/payment-history-detail.component.scss';
+
+.inquiry-timeline-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 20px 0;
+    color: var(--text-primary);
+  }
+  
+  .timeline-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .timeline-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(39, 174, 96, 0.05);
+    border: 1px solid #27ae60;
+    border-radius: 8px;
+    
+    .timeline-icon {
+      font-size: 2rem;
+    }
+    
+    .timeline-content {
+      flex: 1;
+      
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 6px 0;
+        color: #27ae60;
+      }
+      
+      p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+    }
+  }
+  
+  .timeline-phases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .phase-card {
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    
+    &.current {
+      border-color: #27ae60;
+      background: rgba(39, 174, 96, 0.05);
+    }
+    
+    .phase-header {
+      margin-bottom: 8px;
+      
+      .phase-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+      }
+      
+      .phase-label {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+    
+    p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+  }
+}

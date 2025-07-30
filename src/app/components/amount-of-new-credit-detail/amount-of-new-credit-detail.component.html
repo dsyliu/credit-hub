@@ -1,0 +1,117 @@
+<div class="page-container">
+  <div class="page-header">
+    <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
+    <h1>Amount of New Credit</h1>
+    <div class="score-impact-badge positive">
+      <span class="impact-icon">⬆️</span>
+      <span class="impact-text">Excellent Status</span>
+    </div>
+  </div>
+  
+  <div class="ingredient-content" *ngIf="ingredientMapping">
+    <div class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-stats">
+        <div class="stat-card primary">
+          <div class="stat-value">10%</div>
+          <div class="stat-label">of your FICO Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">0</div>
+          <div class="stat-label">Recent inquiries</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Months since new account</div>
+        </div>
+      </div>
+      <p class="ingredient-description">
+        Excellent new credit management! With zero recent inquiries and your newest account being 7 months old, 
+        you're demonstrating responsible credit-seeking behavior that positively impacts your score.
+      </p>
+    </div>
+
+    <div class="attributes-section">
+      <h2>New Credit Details</h2>
+      <div class="attributes-grid">
+        <div 
+          class="attribute-card excellent" 
+          *ngFor="let attribute of ingredientMapping.attributes">
+          <div class="attribute-header">
+            <h3 class="attribute-label">{{ attribute.label }}</h3>
+            <div class="attribute-value positive">{{ attribute.value }}</div>
+          </div>
+          <p class="attribute-description">{{ attribute.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inquiry-timeline-section">
+      <h2>Inquiry Impact Timeline</h2>
+      <div class="timeline-info">
+        <div class="timeline-card">
+          <div class="timeline-icon">🎯</div>
+          <div class="timeline-content">
+            <h4>Current Status: Excellent</h4>
+            <p>Zero recent inquiries means no negative impact on your credit score from new credit applications.</p>
+          </div>
+        </div>
+        <div class="timeline-phases">
+          <div class="phase-card">
+            <div class="phase-header">
+              <span class="phase-number">0-12</span>
+              <span class="phase-label">Months</span>
+            </div>
+            <p>Inquiries have maximum impact on score</p>
+          </div>
+          <div class="phase-card">
+            <div class="phase-header">
+              <span class="phase-number">12-24</span>
+              <span class="phase-label">Months</span>
+            </div>
+            <p>Impact diminishes significantly</p>
+          </div>
+          <div class="phase-card current">
+            <div class="phase-header">
+              <span class="phase-number">24+</span>
+              <span class="phase-label">Months</span>
+            </div>
+            <p>Inquiries fall off report completely</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2>Maintaining Excellence</h2>
+      <div class="recommendations-grid">
+        <div class="recommendation-card priority-high">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">🛑</div>
+            <h4>Limit New Applications</h4>
+            <span class="priority-badge">Maintain Status</span>
+          </div>
+          <p>Continue avoiding unnecessary credit applications to maintain your excellent status in this category.</p>
+        </div>
+        
+        <div class="recommendation-card priority-medium">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">🎯</div>
+            <h4>Strategic Application Timing</h4>
+            <span class="priority-badge medium">When Needed</span>
+          </div>
+          <p>If you must apply for credit, do rate shopping within 14-45 days to minimize inquiry impact.</p>
+        </div>
+        
+        <div class="recommendation-card priority-low">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">📊</div>
+            <h4>Monitor Your Status</h4>
+            <span class="priority-badge low">Ongoing</span>
+          </div>
+          <p>Keep track of any promotional credit offers to avoid accidental hard inquiries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

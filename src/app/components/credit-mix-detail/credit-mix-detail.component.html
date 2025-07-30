@@ -1,0 +1,148 @@
+<div class="page-container">
+  <div class="page-header">
+    <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
+    <h1>Credit Mix</h1>
+    <div class="score-impact-badge positive">
+      <span class="impact-icon">⬆️</span>
+      <span class="impact-text">Excellent Diversity</span>
+    </div>
+  </div>
+  
+  <div class="ingredient-content" *ngIf="ingredientMapping">
+    <div class="overview-section">
+      <h2>Overview</h2>
+      <div class="overview-stats">
+        <div class="stat-card primary">
+          <div class="stat-value">10%</div>
+          <div class="stat-label">of your FICO Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Revolving accounts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Installment loans</div>
+        </div>
+      </div>
+      <p class="ingredient-description">
+        Excellent credit mix! Your diverse portfolio of 8 revolving accounts and 3 installment loans demonstrates 
+        your ability to manage different types of credit responsibly, positively impacting your score.
+      </p>
+    </div>
+
+    <div class="attributes-section">
+      <h2>Credit Portfolio Breakdown</h2>
+      <div class="attributes-grid">
+        <div 
+          class="attribute-card excellent" 
+          *ngFor="let attribute of ingredientMapping.attributes">
+          <div class="attribute-header">
+            <h3 class="attribute-label">{{ attribute.label }}</h3>
+            <div class="attribute-value positive">{{ attribute.value }}</div>
+          </div>
+          <p class="attribute-description">{{ attribute.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-mix-visualization-section">
+      <h2>Credit Mix Visualization</h2>
+      <div class="mix-chart">
+        <div class="chart-container">
+          <div class="pie-chart">
+            <div class="pie-segment revolving" style="--percentage: 73%">
+              <span class="segment-label">Revolving<br>73%</span>
+            </div>
+            <div class="pie-segment installment" style="--percentage: 27%">
+              <span class="segment-label">Installment<br>27%</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-color revolving"></div>
+            <div class="legend-text">
+              <span class="legend-title">Revolving Credit (8 accounts)</span>
+              <span class="legend-desc">Credit cards, lines of credit</span>
+            </div>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color installment"></div>
+            <div class="legend-text">
+              <span class="legend-title">Installment Loans (3 accounts)</span>
+              <span class="legend-desc">Auto loans, mortgages, personal loans</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="credit-types-section">
+      <h2>Understanding Credit Types</h2>
+      <div class="credit-types-grid">
+        <div class="credit-type-card revolving">
+          <div class="type-header">
+            <div class="type-icon">💳</div>
+            <h4>Revolving Credit</h4>
+          </div>
+          <div class="type-features">
+            <div class="feature">✓ Variable balances</div>
+            <div class="feature">✓ Reusable credit line</div>
+            <div class="feature">✓ Minimum payments</div>
+          </div>
+          <div class="type-examples">
+            <strong>Examples:</strong> Credit cards, HELOCs, business lines of credit
+          </div>
+        </div>
+        
+        <div class="credit-type-card installment">
+          <div class="type-header">
+            <div class="type-icon">🏠</div>
+            <h4>Installment Loans</h4>
+          </div>
+          <div class="type-features">
+            <div class="feature">✓ Fixed loan amount</div>
+            <div class="feature">✓ Fixed payment schedule</div>
+            <div class="feature">✓ Decreasing balance</div>
+          </div>
+          <div class="type-examples">
+            <strong>Examples:</strong> Mortgages, auto loans, personal loans, student loans
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendations-section">
+      <h2>Maintaining Your Mix</h2>
+      <div class="recommendations-grid">
+        <div class="recommendation-card priority-high">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">⚖️</div>
+            <h4>Maintain Balance</h4>
+            <span class="priority-badge">Optimal</span>
+          </div>
+          <p>Your current mix is excellent. Focus on managing existing accounts rather than adding new credit types.</p>
+        </div>
+        
+        <div class="recommendation-card priority-medium">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">🔒</div>
+            <h4>Keep Accounts Active</h4>
+            <span class="priority-badge medium">Important</span>
+          </div>
+          <p>Maintain activity on both revolving and installment accounts to preserve your diverse credit profile.</p>
+        </div>
+        
+        <div class="recommendation-card priority-low">
+          <div class="recommendation-header">
+            <div class="recommendation-icon">📊</div>
+            <h4>Monitor Account Status</h4>
+            <span class="priority-badge low">Ongoing</span>
+          </div>
+          <p>Regularly check that all account types are reporting correctly to maintain your credit mix benefit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
