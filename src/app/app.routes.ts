@@ -18,7 +18,7 @@ export const appRoutes: Route[] = [
   { path: 'score-simulator', loadComponent: () => import('./components/score-simulator/score-simulator.component').then(m => m.ScoreSimulatorComponent) },
   { path: 'credit-goals', loadComponent: () => import('./components/credit-goals/credit-goals.component').then(m => m.CreditGoalsComponent) },
   { path: 'recent-activities', loadComponent: () => import('./components/recent-activities/recent-activities.component').then(m => m.RecentActivitiesComponent) },
-  { path: 'freeze-report', loadComponent: () => import('./components/freeze-report/freeze-report.component').then(m => m.FreezeReportComponent) },
+  { path: 'full-report', loadComponent: () => import('./components/full-report/full-report.component').then(m => m.FullReportComponent) },
   { path: 'learn-credit', loadComponent: () => import('./components/learn-credit/learn-credit.component').then(m => m.LearnCreditComponent) },
   
   // Alerts route

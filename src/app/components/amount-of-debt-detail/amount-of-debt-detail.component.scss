@@ -1,4 +1,182 @@
-@import '../payment-history-detail/payment-history-detail.component.scss';
+@use '../payment-history-detail/payment-history-detail.component.scss';
+
+// Override inherited spacing to match L1 page
+.page-container {
+  padding: 15px !important;
+}
+
+.page-header {
+  margin-bottom: 20px !important;
+}
+
+.debt-chart-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+  }
+
+  .chart-container {
+    width: 100%;
+    height: 400px;
+  }
+
+  .echarts-chart {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.debt-tabs-section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+
+  .debt-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 20px;
+  }
+
+  .tab-button {
+    background: none;
+    border: none;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-secondary);
+    }
+    
+    &.active {
+      color: #3498db;
+      border-bottom-color: #3498db;
+      background-color: var(--bg-secondary);
+    }
+  }
+
+  .tab-content {
+    min-height: 250px;
+  }
+
+  .tab-panel {
+    animation: fadeIn 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .debt-chart-section {
+    padding: 10px;
+
+    .chart-container {
+      height: 300px;
+    }
+  }
+
+  .debt-tabs-section {
+    padding: 10px;
+    
+    .tab-button {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .utilization-analysis-section,
+  .action-plan-section {
+    padding: 10px;
+  }
+
+  .page-container {
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .debt-chart-section {
+    padding: 10px;
+
+    .chart-container {
+      height: 250px;
+    }
+  }
+
+  .debt-tabs-section {
+    padding: 10px;
+    
+    .tab-button {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .account-tile {
+    .tile-content {
+      padding: 12px 14px;
+      min-height: 60px;
+    }
+
+    .left-section {
+      gap: 10px;
+
+      .account-icon {
+        font-size: 1.4rem;
+      }
+
+      .account-info {
+        .account-name {
+          font-size: 0.95rem;
+        }
+
+        .account-description {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .right-section {
+      .account-value {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .utilization-analysis-section,
+  .action-plan-section {
+    padding: 10px;
+  }
+
+  .page-container {
+    padding: 8px !important;
+  }
+}
 
 .score-impact-badge.negative {
   background-color: rgba(231, 76, 60, 0.1);
@@ -6,10 +184,99 @@
   border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
+.score-impact-badge.weight {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
 .stat-card.warning {
   background: linear-gradient(135deg, #e74c3c, #c0392b);
   color: white;
   border: none;
+}
+
+.stat-card.positive {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+}
+
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-tile {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border-color: #3498db;
+  }
+
+  .tile-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    min-height: 70px;
+  }
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 0;
+
+    .account-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .account-info {
+      flex: 1;
+      min-width: 0;
+
+      .account-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        line-height: 1.3;
+      }
+
+      .account-description {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.3;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    .account-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+  }
 }
 
 .attribute-card.warning {
@@ -24,20 +291,20 @@
 .utilization-analysis-section {
   background: var(--card-bg);
   border-radius: 12px;
-  padding: 24px;
+  padding: 18px;
   box-shadow: 0 2px 10px var(--shadow-color);
-  
+
   h2 {
     font-size: 1.5rem;
     font-weight: 500;
-    margin: 0 0 20px 0;
+    margin: 0 0 8px 0;
     color: var(--text-primary);
   }
-  
+
   .chart-container {
     margin-bottom: 20px;
   }
-  
+
   .utilization-bar {
     position: relative;
     height: 40px;
@@ -45,39 +312,39 @@
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 40px;
-    
+
     .utilization-fill {
       height: 100%;
       background: linear-gradient(90deg, #27ae60 0%, #f39c12 50%, #e74c3c 100%);
       border-radius: 20px;
       transition: width 0.3s ease;
     }
-    
+
     .utilization-markers {
       position: absolute;
       top: -30px;
       left: 0;
       right: 0;
       height: 100px;
-      
+
       .marker {
         position: absolute;
         width: 2px;
         height: 70px;
         transform: translateX(-50%);
-        
+
         &.optimal {
           background: #27ae60;
         }
-        
+
         &.current {
           background: #e74c3c;
         }
-        
+
         &.danger {
           background: #8e44ad;
         }
-        
+
         .marker-label {
           position: absolute;
           top: -25px;
@@ -91,32 +358,32 @@
       }
     }
   }
-  
+
   .chart-legend {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    
+
     .legend-item {
       display: flex;
       align-items: center;
       gap: 8px;
       font-size: 0.9rem;
-      
+
       .legend-color {
         width: 16px;
         height: 16px;
         border-radius: 50%;
-        
+
         .optimal & {
           background: #27ae60;
         }
-        
+
         .warning & {
           background: #e74c3c;
         }
-        
+
         .danger & {
           background: #8e44ad;
         }
@@ -138,22 +405,22 @@
 .action-plan-section {
   background: var(--card-bg);
   border-radius: 12px;
-  padding: 24px;
+  padding: 18px;
   box-shadow: 0 2px 10px var(--shadow-color);
-  
+
   h2 {
     font-size: 1.5rem;
     font-weight: 500;
-    margin: 0 0 20px 0;
+    margin: 0 0 8px 0;
     color: var(--text-primary);
   }
-  
+
   .action-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
   }
-  
+
   .step-card {
     display: flex;
     align-items: flex-start;
@@ -163,12 +430,12 @@
     border-radius: 8px;
     border: 1px solid var(--border-color);
     transition: all 0.3s ease;
-    
+
     &:hover {
       box-shadow: 0 2px 8px var(--shadow-color);
       border-color: #3498db;
     }
-    
+
     .step-number {
       width: 32px;
       height: 32px;
@@ -182,17 +449,17 @@
       font-size: 1.1rem;
       flex-shrink: 0;
     }
-    
+
     .step-content {
       flex: 1;
-      
+
       h4 {
         font-size: 1rem;
         font-weight: 600;
         margin: 0 0 8px 0;
         color: var(--text-primary);
       }
-      
+
       p {
         font-size: 0.9rem;
         line-height: 1.4;
@@ -207,16 +474,47 @@
   .utilization-markers .marker .marker-label {
     font-size: 0.7rem;
   }
-  
+
   .chart-legend {
     gap: 10px;
-    
+
     .legend-item {
       font-size: 0.8rem;
     }
   }
-  
+
   .action-steps {
     grid-template-columns: 1fr;
+  }
+
+  .account-tile {
+    .tile-content {
+      padding: 14px 16px;
+      min-height: 65px;
+    }
+
+    .left-section {
+      gap: 12px;
+
+      .account-icon {
+        font-size: 1.6rem;
+      }
+
+      .account-info {
+        .account-name {
+          font-size: 1rem;
+        }
+
+        .account-description {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .right-section {
+      .account-value {
+        font-size: 1.1rem;
+      }
+    }
   }
 }

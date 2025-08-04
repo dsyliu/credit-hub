@@ -2,180 +2,425 @@
   <div class="page-header">
     <button class="back-button" (click)="goBack()">← Back to Dashboard</button>
     <h1>Amount of Debt</h1>
-    <div class="score-impact-badge negative">
-      <span class="impact-icon">⬇️</span>
-      <span class="impact-text">Needs Improvement</span>
+    <div class="score-impact-badge weight">
+      <span class="impact-icon">ℹ️</span>
+      <span class="impact-text">30% of FICO Score</span>
     </div>
   </div>
-  
+
   <div class="ingredient-content" *ngIf="ingredientMapping">
-    <div class="overview-section">
-      <h2>Overview</h2>
-      <div class="overview-stats">
-        <div class="stat-card primary">
-          <div class="stat-value">30%</div>
-          <div class="stat-label">of your FICO Score</div>
-        </div>
-        <div class="stat-card warning">
-          <div class="stat-value">22%</div>
-          <div class="stat-label">Current utilization</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">$12,200</div>
-          <div class="stat-label">Total balance</div>
-        </div>
-      </div>
-      <p class="ingredient-description">
-        Your debt utilization is currently above the recommended threshold. At 22%, this is likely reducing 
-        your credit score by 15-25 points. Reducing your utilization below 10% could significantly improve your score.
-      </p>
-    </div>
-
-    <div class="attributes-section">
-      <h2>Debt Breakdown</h2>
-      <div class="attributes-grid">
-        <div 
-          class="attribute-card" 
-          *ngFor="let attribute of ingredientMapping.attributes"
-          [class.warning]="attribute.key === 'revolving_utilization'">
-          <div class="attribute-header">
-            <h3 class="attribute-label">{{ attribute.label }}</h3>
-            <div class="attribute-value" 
-                 [class.warning-value]="attribute.key === 'revolving_utilization'">
-              {{ attribute.value }}
-            </div>
-          </div>
-          <p class="attribute-description">{{ attribute.description }}</p>
-        </div>
+    <!-- Debt History Chart Section -->
+    <div class="debt-chart-section">
+      <h2>12-Month Debt History</h2>
+      <div class="chart-container">
+        <div echarts [options]="chartOption" class="echarts-chart"></div>
       </div>
     </div>
 
-    <div class="utilization-analysis-section">
-      <h2>Utilization Analysis</h2>
-      <div class="utilization-chart">
-        <div class="chart-container">
-          <div class="utilization-bar">
-            <div class="utilization-fill" style="width: 22%"></div>
-            <div class="utilization-markers">
-              <div class="marker optimal" style="left: 10%">
-                <span class="marker-label">Optimal (10%)</span>
+    <!-- Debt Analysis Tabs -->
+    <div class="debt-tabs-section">
+      <div class="debt-tabs">
+        <button
+          class="tab-button"
+          [class.active]="activeTab === 'credit'"
+          (click)="setActiveTab('credit')"
+        >
+          Credit Debt
+        </button>
+        <button
+          class="tab-button"
+          [class.active]="activeTab === 'loan'"
+          (click)="setActiveTab('loan')"
+        >
+          Loan Debt
+        </button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Credit Debt Tab -->
+        <div *ngIf="activeTab === 'credit'" class="tab-panel">
+          <div class="overview-section">
+            <h2>Overview</h2>
+            <div class="overview-stats">
+              <div class="stat-card">
+                <div class="stat-value">$4,835</div>
+                <div class="stat-label">Current Balance</div>
               </div>
-              <div class="marker current" style="left: 22%">
-                <span class="marker-label">Current (22%)</span>
+              <div class="stat-card">
+                <div class="stat-value">$17,165</div>
+                <div class="stat-label">Available Credit</div>
               </div>
-              <div class="marker danger" style="left: 30%">
-                <span class="marker-label">High Risk (30%+)</span>
+              <div class="stat-card">
+                <div class="stat-value">22%</div>
+                <div class="stat-label">Current Utilization</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">$240</div>
+                <div class="stat-label">Monthly Payment</div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="chart-legend">
-          <div class="legend-item optimal">
-            <div class="legend-color"></div>
-            <span>Optimal Range (0-10%)</span>
-          </div>
-          <div class="legend-item warning">
-            <div class="legend-color"></div>
-            <span>Your Current Level (22%)</span>
-          </div>
-          <div class="legend-item danger">
-            <div class="legend-color"></div>
-            <span>High Risk (30%+)</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="impact-analysis-section">
-      <h2>Impact Analysis</h2>
-      <div class="impact-cards">
-        <div class="impact-card negative">
-          <div class="impact-header">
-            <div class="impact-icon">⚠️</div>
-            <h4>High Utilization Impact</h4>
           </div>
-          <p>Your 22% utilization is above the recommended 10% threshold, likely reducing your score by 15-25 points.</p>
-        </div>
-        <div class="impact-card potential">
-          <div class="impact-header">
-            <div class="impact-icon">🎯</div>
-            <h4>Improvement Potential</h4>
-          </div>
-          <p>Reducing utilization to under 10% could increase your score by 20-30 points within 1-2 months.</p>
-        </div>
-      </div>
-    </div>
 
-    <div class="recommendations-section">
-      <h2>Improvement Strategies</h2>
-      <div class="recommendations-grid">
-        <div class="recommendation-card priority-high">
-          <div class="recommendation-header">
-            <div class="recommendation-icon">💳</div>
-            <h4>Pay Down Balances</h4>
-            <span class="priority-badge">High Impact</span>
+          <div class="attributes-section">
+            <h2>Account Breakdown</h2>
+            <div class="accounts-list">
+              <div class="account-tile">
+                <div class="tile-content">
+                  <div class="left-section">
+                    <div class="account-icon">💳</div>
+                    <div class="account-info">
+                      <div class="account-name">Chase Sapphire Preferred</div>
+                      <div class="account-description">Balance: $2,150 | Limit: $8,500 | Utilization: 25%</div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div class="account-value">$2,150</div>
+                  </div>
+                </div>
+              </div>
+              <div class="account-tile">
+                <div class="tile-content">
+                  <div class="left-section">
+                    <div class="account-icon">💳</div>
+                    <div class="account-info">
+                      <div class="account-name">Capital One Venture</div>
+                      <div class="account-description">Balance: $1,685 | Limit: $5,000 | Utilization: 34%</div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div class="account-value">$1,685</div>
+                  </div>
+                </div>
+              </div>
+              <div class="account-tile">
+                <div class="tile-content">
+                  <div class="left-section">
+                    <div class="account-icon">💳</div>
+                    <div class="account-info">
+                      <div class="account-name">Discover It Cash Back</div>
+                      <div class="account-description">Balance: $1,000 | Limit: $3,665 | Utilization: 27%</div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div class="account-value">$1,000</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p>Target: Reduce total balance to under $5,500 (10% utilization). Focus on highest balance cards first.</p>
-          <div class="recommendation-actions">
-            <button class="action-btn">Create Payment Plan</button>
-          </div>
-        </div>
-        
-        <div class="recommendation-card priority-medium">
-          <div class="recommendation-header">
-            <div class="recommendation-icon">📈</div>
-            <h4>Request Credit Increases</h4>
-            <span class="priority-badge medium">Medium Impact</span>
-          </div>
-          <p>Ask for credit limit increases on existing cards to lower utilization without paying down debt.</p>
-          <div class="recommendation-actions">
-            <button class="action-btn secondary">Request Increases</button>
-          </div>
-        </div>
-        
-        <div class="recommendation-card priority-medium">
-          <div class="recommendation-header">
-            <div class="recommendation-icon">📅</div>
-            <h4>Strategic Payment Timing</h4>
-            <span class="priority-badge medium">Quick Win</span>
-          </div>
-          <p>Make payments before statement closing dates to reduce reported balances.</p>
-          <div class="recommendation-actions">
-            <button class="action-btn secondary">Set Payment Schedule</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="action-plan-section">
-      <h2>30-Day Action Plan</h2>
-      <div class="action-steps">
-        <div class="step-card">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h4>Week 1: Assessment</h4>
-            <p>List all credit cards, balances, limits, and statement closing dates.</p>
+
+          <div class="impact-analysis-section">
+            <h2>Impact Analysis</h2>
+            <div class="impact-cards">
+              <div class="impact-card negative">
+                <div class="impact-header">
+                  <div class="impact-icon">⚠️</div>
+                  <h4>High Utilization Impact</h4>
+                </div>
+                <p>
+                  Your 22% utilization is above the recommended 10% threshold,
+                  likely reducing your score by 15-25 points.
+                </p>
+              </div>
+              <div class="impact-card potential">
+                <div class="impact-header">
+                  <div class="impact-icon">🎯</div>
+                  <h4>Improvement Potential</h4>
+                </div>
+                <p>
+                  Reducing utilization to under 10% could increase your score by
+                  20-30 points within 1-2 months.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="recommendations-section">
+            <h2>Improvement Strategies</h2>
+            <div class="recommendations-grid">
+              <div class="recommendation-card priority-high">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">💳</div>
+                  <h4>Pay Down Balances</h4>
+                  <span class="priority-badge">High Impact</span>
+                </div>
+                <p>
+                  Target: Reduce credit card balance to under $1,700 (10%
+                  utilization). Focus on highest balance cards first.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn">Create Payment Plan</button>
+                </div>
+              </div>
+
+              <div class="recommendation-card priority-medium">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">📈</div>
+                  <h4>Request Credit Increases</h4>
+                  <span class="priority-badge medium">Medium Impact</span>
+                </div>
+                <p>
+                  Ask for credit limit increases on existing cards to lower
+                  utilization without paying down debt.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn secondary">
+                    Request Increases
+                  </button>
+                </div>
+              </div>
+
+              <div class="recommendation-card priority-medium">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">📅</div>
+                  <h4>Strategic Payment Timing</h4>
+                  <span class="priority-badge medium">Quick Win</span>
+                </div>
+                <p>
+                  Make payments before statement closing dates to reduce
+                  reported balances.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn secondary">
+                    Set Payment Schedule
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-plan-section">
+            <h2>30-Day Action Plan</h2>
+            <div class="action-steps">
+              <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Week 1: Assessment</h4>
+                  <p>
+                    List all credit cards, balances, limits, and statement
+                    closing dates.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Week 2: Payment Strategy</h4>
+                  <p>
+                    Make extra payments on highest utilization cards before
+                    statement dates.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Week 3: Credit Requests</h4>
+                  <p>
+                    Request credit limit increases on cards with good payment
+                    history.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Week 4: Monitor Progress</h4>
+                  <p>
+                    Check updated balances and calculate new utilization ratio.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="step-card">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h4>Week 2: Payment Strategy</h4>
-            <p>Make extra payments on highest utilization cards before statement dates.</p>
+
+        <!-- Loan Debt Tab -->
+        <div *ngIf="activeTab === 'loan'" class="tab-panel">
+          <div class="overview-section">
+            <h2>Overview</h2>
+            <div class="overview-stats">
+              <div class="stat-card">
+                <div class="stat-value">$7,365</div>
+                <div class="stat-label">Remaining Loan Balance</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">↓ $2,100</div>
+                <div class="stat-label">Reduced This Year</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">78%</div>
+                <div class="stat-label">Percentage Paid Off</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">$660</div>
+                <div class="stat-label">Monthly Amount</div>
+              </div>
+            </div>
+
           </div>
-        </div>
-        <div class="step-card">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h4>Week 3: Credit Requests</h4>
-            <p>Request credit limit increases on cards with good payment history.</p>
+
+          <div class="attributes-section">
+            <h2>Account Breakdown</h2>
+            <div class="accounts-list">
+              <div class="account-tile">
+                <div class="tile-content">
+                  <div class="left-section">
+                    <div class="account-icon">🚗</div>
+                    <div class="account-info">
+                      <div class="account-name">Honda Civic Auto Loan</div>
+                      <div class="account-description">Wells Fargo | Payment: $385 | 18 months left | 4.2% APR</div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div class="account-value">$4,165</div>
+                  </div>
+                </div>
+              </div>
+              <div class="account-tile">
+                <div class="tile-content">
+                  <div class="left-section">
+                    <div class="account-icon">💰</div>
+                    <div class="account-info">
+                      <div class="account-name">Personal Loan</div>
+                      <div class="account-description">Marcus by Goldman Sachs | Payment: $275 | 14 months left | 6.8% APR</div>
+                    </div>
+                  </div>
+                  <div class="right-section">
+                    <div class="account-value">$3,200</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
-        <div class="step-card">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h4>Week 4: Monitor Progress</h4>
-            <p>Check updated balances and calculate new utilization ratio.</p>
+
+
+
+          <div class="impact-analysis-section">
+            <h2>Impact Analysis</h2>
+            <div class="impact-cards">
+              <div class="impact-card positive">
+                <div class="impact-header">
+                  <div class="impact-icon">✅</div>
+                  <h4>Positive Payment History</h4>
+                </div>
+                <p>
+                  Consistent loan payments are building positive credit history
+                  and demonstrating financial responsibility.
+                </p>
+              </div>
+              <div class="impact-card potential">
+                <div class="impact-header">
+                  <div class="impact-icon">📈</div>
+                  <h4>Credit Mix Benefit</h4>
+                </div>
+                <p>
+                  Having both installment loans and revolving credit
+                  demonstrates responsible credit management to lenders.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="recommendations-section">
+            <h2>Improvement Strategies</h2>
+            <div class="recommendations-grid">
+              <div class="recommendation-card priority-high">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">💰</div>
+                  <h4>Continue Current Payments</h4>
+                  <span class="priority-badge">Maintain</span>
+                </div>
+                <p>
+                  Keep making on-time payments to maintain positive payment
+                  history and continue reducing debt balances.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn">Set Auto-Pay</button>
+                </div>
+              </div>
+
+              <div class="recommendation-card priority-medium">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">🎯</div>
+                  <h4>Consider Extra Payments</h4>
+                  <span class="priority-badge medium">Optional</span>
+                </div>
+                <p>
+                  Making extra principal payments can save interest and improve
+                  your debt-to-income ratio faster.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn secondary">
+                    Calculate Savings
+                  </button>
+                </div>
+              </div>
+
+              <div class="recommendation-card priority-medium">
+                <div class="recommendation-header">
+                  <div class="recommendation-icon">🔄</div>
+                  <h4>Refinancing Options</h4>
+                  <span class="priority-badge medium">Consider</span>
+                </div>
+                <p>
+                  Check if refinancing at lower rates could reduce monthly
+                  payments or total interest paid.
+                </p>
+                <div class="recommendation-actions">
+                  <button class="action-btn secondary">Check Rates</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-plan-section">
+            <h2>30-Day Action Plan</h2>
+            <div class="action-steps">
+              <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Week 1: Automation</h4>
+                  <p>
+                    Set up automatic payments to ensure you never miss a due
+                    date and maintain perfect payment history.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Week 2: Review Terms</h4>
+                  <p>
+                    Review current loan terms and research refinancing options
+                    for potential savings.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Week 3: Extra Payments</h4>
+                  <p>
+                    If budget allows, consider making extra principal payments
+                    to reduce interest costs.
+                  </p>
+                </div>
+              </div>
+              <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Week 4: Monitor Progress</h4>
+                  <p>
+                    Track loan balances and celebrate milestones as you continue
+                    paying down debt.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

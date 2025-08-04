@@ -35,11 +35,11 @@ export class ActionTilesComponent {
       route: '/recent-activities',
     },
     {
-      id: 'freeze-report',
-      title: 'Freeze Report',
-      description: 'Manage credit freezes',
-      icon: '🔒',
-      route: '/freeze-report',
+      id: 'full-report',
+      title: 'Full Report',
+      description: 'View complete credit report',
+      icon: '📊',
+      route: '/full-report',
     },
     {
       id: 'learn-credit',
