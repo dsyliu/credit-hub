@@ -28,12 +28,14 @@ export class AmountOfDebtDetailComponent implements OnInit {
   ingredientMapping: IngredientMapping | null = null;
   debtHistory: DebtData[] = [];
   chartOption: EChartsOption = {};
+  creditChartOption: EChartsOption = {};
   activeTab: 'credit' | 'loan' = 'credit';
 
   ngOnInit(): void {
     this.ingredientMapping = getIngredientMapping('amount-of-debt');
     this.generateDebtHistory();
     this.initChart();
+    this.initCreditChart();
   }
 
   private generateDebtHistory(): void {
@@ -266,6 +268,153 @@ export class AmountOfDebtDetailComponent implements OnInit {
     }
 
     return canvas;
+  }
+
+  private initCreditChart(): void {
+    // Generate 12 months of credit card data ending with Aug 2025
+    const months = [
+      'Sep 24',
+      'Oct 24',
+      'Nov 24',
+      'Dec 24',
+      'Jan 25',
+      'Feb 25',
+      'Mar 25',
+      'Apr 25',
+      'May 25',
+      'Jun 25',
+      'Jul 25',
+      'Aug 25',
+    ];
+
+    // Static predefined data for consistent chart display
+    const utilizationData: number[] = [18, 32, 8, 25, 38, 12, 28, 35, 9, 27, 31, 22];
+    
+    // Calculate correlated debt amounts based on reference: 22% = $4835
+    const creditLimit = Math.round(4835 / 0.22); // $21,977 credit limit
+    const balanceData: number[] = utilizationData.map(utilization => 
+      Math.round((utilization / 100) * creditLimit)
+    );
+
+    this.creditChartOption = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+        },
+        formatter: (params: any) => {
+          const paramsArray = Array.isArray(params) ? params : [params];
+          let result = `<strong>${paramsArray[0].axisValue}</strong><br/>`;
+          paramsArray.forEach((param: any) => {
+            const utilizationValue = typeof param.value === 'number' ? param.value : 0;
+            const debtAmount = Math.round((utilizationValue / 100) * creditLimit);
+            result += `${param.marker}${param.seriesName}: ${utilizationValue}%<br/>`;
+            result += `Current Debt: ${this.formatCurrency(debtAmount)}<br/>`;
+          });
+          return result;
+        },
+      },
+
+      visualMap: {
+        top: 50,
+        right: 10,
+        pieces: [
+          {
+            gt: 0,
+            lte: 10,
+            color: '#22c55e'
+          },
+          {
+            gt: 10,
+            lte: 20,
+            color: '#eab308'
+          },
+          {
+            gt: 20,
+            lte: 30,
+            color: '#f97316'
+          },
+          {
+            gt: 30,
+            color: '#ef4444'
+          }
+        ],
+        outOfRange: {
+          color: '#999'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '15%',
+        top: '10%',
+        containLabel: true,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: months,
+          axisPointer: {
+            type: 'shadow',
+          },
+          axisLabel: {
+            color: '#666',
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#ddd',
+            },
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          name: 'Utilization Rate',
+          position: 'left',
+          axisLabel: {
+            formatter: '{value}%',
+            color: '#666',
+          },
+          axisLine: {
+            lineStyle: {
+              color: '#22c55e',
+            },
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#f0f0f0',
+            },
+          },
+        },
+      ],
+      series: [
+        {
+          name: 'Utilization Rate',
+          type: 'line',
+          yAxisIndex: 0,
+          data: utilizationData,
+          lineStyle: {
+            width: 3,
+          },
+          symbol: 'circle',
+          symbolSize: 6,
+          markLine: {
+            silent: true,
+            lineStyle: {
+              color: '#ccc'
+            },
+            data: [
+              { yAxis: 10 },
+              { yAxis: 20 },
+              { yAxis: 30 }
+            ]
+          }
+        },
+      ],
+      animationDuration: 1000,
+      animationEasing: 'cubicOut',
+    };
   }
 
   private formatMonthYear(monthYear: string): string {

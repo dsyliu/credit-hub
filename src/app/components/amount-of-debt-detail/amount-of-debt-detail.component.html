@@ -9,14 +9,6 @@
   </div>
 
   <div class="ingredient-content" *ngIf="ingredientMapping">
-    <!-- Debt History Chart Section -->
-    <div class="debt-chart-section">
-      <h2>12-Month Debt History</h2>
-      <div class="chart-container">
-        <div echarts [options]="chartOption" class="echarts-chart"></div>
-      </div>
-    </div>
-
     <!-- Debt Analysis Tabs -->
     <div class="debt-tabs-section">
       <div class="debt-tabs">
@@ -60,6 +52,13 @@
               </div>
             </div>
 
+          </div>
+
+          <div class="credit-chart-section">
+            <h2>12-Month Balance & Utilization Trend</h2>
+            <div class="chart-container">
+              <div echarts [options]="creditChartOption" class="echarts-chart"></div>
+            </div>
           </div>
 
           <div class="attributes-section">
